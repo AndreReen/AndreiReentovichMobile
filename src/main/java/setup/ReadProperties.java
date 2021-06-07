@@ -7,15 +7,15 @@ import java.util.Properties;
 
 public class ReadProperties {
 
-    public static HashMap<String, String> props;
+    public static HashMap<String, String> propertiesMap;
 
     public static void main() {
-        props = new HashMap<>();
+        propertiesMap = new HashMap<>();
         ReadProperties app = new ReadProperties();
-        app.printAll("testProps.properties");
+        app.propertyToMap("testProps.properties");
     }
 
-    private void printAll(String filename) {
+    private void propertyToMap(String filename) {
 
         try (InputStream input = getClass().getClassLoader().getResourceAsStream(filename)) {
 
@@ -29,13 +29,11 @@ public class ReadProperties {
             prop.load(input);
 
             for (String key : prop.stringPropertyNames()) {
-                props.put(key, prop.getProperty(key));
+                propertiesMap.put(key, prop.getProperty(key));
             }
 
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
     }
-
 }

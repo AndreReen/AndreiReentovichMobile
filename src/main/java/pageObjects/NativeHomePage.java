@@ -18,6 +18,9 @@ public class NativeHomePage {
     @AndroidFindBy(id = "platkovsky.alexey.epamtestapp:id/login_pwd")
     WebElement passwordField;
 
+    @AndroidFindBy(xpath = "//android.widget.AutoCompleteTextView")
+    WebElement autoCompleteView;
+
 
     public NativeHomePage(AppiumDriver appiumDriver) {
         PageFactory.initElements(new AppiumFieldDecorator(appiumDriver), this);
@@ -31,5 +34,9 @@ public class NativeHomePage {
 
     public void goToRegistration() {
         registerBtn.click();
+    }
+
+    public String getAutoCompleteView() {
+        return autoCompleteView.getText();
     }
 }

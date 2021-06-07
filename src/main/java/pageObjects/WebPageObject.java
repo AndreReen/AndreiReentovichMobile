@@ -1,28 +1,22 @@
 package pageObjects;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class WebPageObject  {
-
-//    @AndroidFindBy(accessibility = "q")
-//    WebElement searchField;
+public class WebPageObject {
 
     @FindBy(xpath = "//input[@name='q']")
     WebElement searchField;
 
-    //@FindBy(xpath = "//input[@name='q']/div")
-    @FindBy(xpath = "//ul[@role = 'listbox']/li")
+    @FindBy(xpath = "//div[@id='rso']/div")
     private List<WebElement> searchResults;
 
     public void search(String text) {
-        searchField.sendKeys(text);
+        searchField.sendKeys(text + "\n");
     }
 
     public List<WebElement> getResults() {

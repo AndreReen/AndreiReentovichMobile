@@ -2,7 +2,7 @@ package setup;
 
 import org.testng.annotations.DataProvider;
 
-import static setup.ReadProperties.props;
+import static setup.ReadProperties.propertiesMap;
 
 public class TestDataProvider {
 
@@ -10,10 +10,9 @@ public class TestDataProvider {
     public Object[][] nativeTestData(){
         ReadProperties.main();
         return new  Object[][] {
-                {props.get("email"), props.get("name"), props.get("password"), props.get("title")}
+                {propertiesMap.get("email"), propertiesMap.get("name"), propertiesMap.get("password"), propertiesMap.get("title")}
         };
     }
-
 
     @DataProvider
     public Object[][] webTestData(){

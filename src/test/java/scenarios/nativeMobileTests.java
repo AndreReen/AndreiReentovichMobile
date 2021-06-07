@@ -10,7 +10,7 @@ public class nativeMobileTests extends BaseTest {
     @Test(groups = {"native"},
             description = "Performs registration and signs in to the app, checks BudgetActivity title text",
             dataProviderClass = TestDataProvider.class, dataProvider = "nativeTestData")
-    public void mobileExercise2test(String email, String name, String password, String title) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+    public void nativeExerciseTest(String email, String name, String password, String title) {
 
         getNativePO().getHomePage().goToRegistration();
         getNativePO().getRegistrationPage().performRegistration(email,name, password);

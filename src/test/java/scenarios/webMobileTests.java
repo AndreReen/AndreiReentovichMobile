@@ -7,9 +7,9 @@ import setup.TestDataProvider;
 
 public class webMobileTests extends BaseTest {
 
-    @Test(groups = {"web"}, description = "Make sure that we've opened IANA homepage",
+    @Test(groups = {"web"}, description = "Open Google.com & search EPAM, assure we get search results",
     dataProviderClass = TestDataProvider.class, dataProvider = "webTestData")
-    public void simpleWebTest(String URL, String textToSearch) throws InterruptedException {
+    public void webExerciseTest(String URL, String textToSearch) {
 
         getDriver().get(URL);
         getWebPO().search(textToSearch);
