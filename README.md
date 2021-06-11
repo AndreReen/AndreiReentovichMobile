@@ -1,6 +1,6 @@
 Mobile exercise 3 
 
-To make connection to the mobilecloud - 
+To establish connection with the mobilecloud - 
 place your token in the token.properties file inside project root directory.
 
 
