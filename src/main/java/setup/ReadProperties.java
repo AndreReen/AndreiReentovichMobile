@@ -3,16 +3,18 @@ package setup;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class ReadProperties {
 
-    public static HashMap<String, String> propertiesMap;
+    private static HashMap<String, String> propertiesMap;
 
-    public static void main() {
+     public HashMap<String,String> getPropetriesMap() {
         propertiesMap = new HashMap<>();
         ReadProperties app = new ReadProperties();
         app.propertyToMap("testProps.properties");
+        return propertiesMap;
     }
 
     private void propertyToMap(String filename) {

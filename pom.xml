@@ -8,6 +8,8 @@
     <artifactId>AndreiReentovichMobile</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+
+
     <dependencies>
         <dependency>
             <groupId>io.appium</groupId>
@@ -19,7 +21,33 @@
             <artifactId>testng</artifactId>
             <version>7.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>2.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.6</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>4.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>properties-maven-plugin</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
+
+
+<!--    <properties>-->
+<!--        <token>eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJMR0xsSnVPQmxyUHF3Wi1JaTQ1VG1KQnVfakdVNnRLV3hKdm1JQ0w3cDU4In0.eyJleHAiOjE2MjU4NTU3NTEsImlhdCI6MTYyMzI2Mzc1MSwianRpIjoiNjk0NDQ4NTctODA2My00YjFkLTljNzUtMzYyNjFmNjVhZTBlIiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5lcG0tdHN0Zi5wcm9qZWN0cy5lcGFtLmNvbS9hdXRoL3JlYWxtcy9wcm9kdWN0aW9uIiwiYXVkIjoibW9iaWxlY2xvdWQiLCJzdWIiOiIzODg1N2QxYS00NzBkLTQzMTctODEyYS1iM2RlOWRjNjliMzEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJtb2JpbGVjbG91ZCIsInNlc3Npb25fc3RhdGUiOiI3MjU2ZWEzMy1mOWRlLTRkZTYtYmViMC0xMWQ5YTdkOWIwYjQiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImNsb3VkX3VzZXIiLCJvZmZsaW5lX2FjY2VzcyJdfSwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBvZmZsaW5lX2FjY2VzcyBlbWFpbCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJncm91cF9pZCI6ImZjZmViODYzLTgwMjQtNGI2NC1hZjUwLWY3ZGZlYTUyY2Q5MyIsIm5hbWUiOiJBbmRyZWkgUmVlbnRvdmljaCIsInByZWZlcnJlZF91c2VybmFtZSI6ImFuZHJlaV9yZWVudG92aWNoQGVwYW0uY29tIiwiZ2l2ZW5fbmFtZSI6IkFuZHJlaSIsImZhbWlseV9uYW1lIjoiUmVlbnRvdmljaCIsImVtYWlsIjoiYW5kcmVpX3JlZW50b3ZpY2hAZXBhbS5jb20ifQ.fZTIfmMxQL5J87QrL7Mr6aSznreQ5pHGuAA4tt06BG65xmWnMDyHS2ekGDCIQ-OJZGb7LhbT24vaWIiWZxkytQdH21DFetZtMeHfTrlZHb0xYn-GYAHbExjXKBVjxJjOd07SZhj4LKiRLCjaF3G_Mz5wRChlgwTvCUyUvUe6qZD2BCk0hhJTnxlrWqcx_DeCSQkLnn9mVcxScQVtm5sNyOiFoTq0BbELQxImsLdjqCExntCUUAxuIhCQDfNtamkSP8wnLl6a0mnhc2u12pQnc_VGmU6Aovczih3xnlkU9mvggz4fT-DnvrUJks5Rew-4gVBlfxHSVLMO8UfBtXjWUw</token>-->
+<!--    </properties>-->
 
     <build>
         <plugins>
@@ -32,7 +60,8 @@
                         <suiteXmlFile>${suite.file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
-                        <ts.appium>http://localhost:4723/wd/hub</ts.appium>
+<!--                        <ts.appium>http://localhost:4723/wd/hub</ts.appium>-->
+                        <ts.appium>https://EPM-TSTF:${token}@mobilecloud.epam.com/wd/hub</ts.appium>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
@@ -43,6 +72,24 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>token.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -67,7 +114,51 @@
                 <suite.file>./src/test/resources/webTNG.xml</suite.file>
             </properties>
         </profile>
+
+        <profile>
+            <id>webCloudAndroid</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/webCloudAndroid.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>webCloudIOS</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/webCloudIOS.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>nativeCloudAndroid</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/nativeCloudAndroid.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>nativeCloudIOS</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/nativeCloudIOS.xml</suite.file>
+            </properties>
+        </profile>
+
     </profiles>
+
+
+
 
 
 </project>

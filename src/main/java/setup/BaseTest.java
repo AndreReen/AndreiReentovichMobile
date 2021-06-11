@@ -30,21 +30,37 @@ public class BaseTest implements IDriver {
         return webPO;
     }
 
-    @Parameters({"platformName", "appType", "deviceName", "browserName", "app"})
+    @Parameters({"platformName","appType","deviceName","udid", "browserName","app", "appPackage", "appActivity", "bundleId"})
     @BeforeSuite(alwaysRun = true)
-    public void setUp(String platformName, String appType, String deviceName, @Optional("") String browserName, @Optional("") String app) throws Exception {
+    public void setUp(String platformName,
+                      String appType,
+                      @Optional("") String deviceName,
+                      @Optional("") String udid,
+                      @Optional("") String browserName,
+                      @Optional("") String app,
+                      @Optional("") String appPackage,
+                      @Optional("") String appActivity,
+                      @Optional("") String bundleId
+    ) throws Exception {
         System.out.println("Before: app type - " + appType);
-        setAppiumDriver(platformName, deviceName, browserName, app);
+        setAppiumDriver(platformName, deviceName, udid, browserName, app, appPackage, appActivity, bundleId);
         setPageObject(appType, appiumDriver);
     }
 
     @AfterSuite(alwaysRun = true)
     public void tearDown() throws Exception {
         System.out.println("After");
-        appiumDriver.closeApp();
+        //appiumDriver.closeApp();
     }
 
-    private void setAppiumDriver(String platformName, String deviceName, String browserName, String app) {
+    private void setAppiumDriver(String platformName,
+                                 String deviceName,
+                                 String udid,
+                                 String browserName,
+                                 String app,
+                                 String appPackage,
+                                 String appActivity,
+                                 String bundleId) {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         //mandatory Android capabilities
@@ -55,6 +71,12 @@ public class BaseTest implements IDriver {
 
         capabilities.setCapability("browserName", browserName);
         capabilities.setCapability("chromedriverDisableBuildCheck", "true");
+
+        capabilities.setCapability("appPackage", appPackage);
+        capabilities.setCapability("appActivity", appActivity);
+
+        capabilities.setCapability("bundleId", bundleId);
+        capabilities.setCapability("udid",udid);
 
         try {
             appiumDriver = new AppiumDriver(new URL(System.getProperty("ts.appium")), capabilities);
