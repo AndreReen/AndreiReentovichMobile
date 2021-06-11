@@ -1,15 +1,20 @@
 package scenarios;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import setup.BaseTest;
+import setup.TestDataProvider;
 
 public class nativeMobileTests extends BaseTest {
 
-    @Test(groups = {"native"}, description = "This simple test just click on the Sign In button")
-    public void simpleNativeTest() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        getPo().getWelement("signInBtn").click();
-        System.out.println("Simplest Android native test done");
+    @Test(groups = {"native"},
+            description = "Performs registration and signs in to the app, checks BudgetActivity title text",
+            dataProviderClass = TestDataProvider.class, dataProvider = "nativeTestData")
+    public void nativeExerciseTest(String email, String name, String password, String title) {
 
+        getNativePO().getHomePage().goToRegistration();
+        getNativePO().getRegistrationPage().performRegistration(email,name, password);
+        getNativePO().getHomePage().performLogin(email, password);
+        Assert.assertEquals(getNativePO().getBudgetPage().getTitle(), title);
     }
-
 }

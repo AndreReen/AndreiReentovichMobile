@@ -1,19 +1,29 @@
 package pageObjects;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
-public class NativePageObject  {
-
-    @AndroidFindBy(id = "platkovsky.alexey.epamtestapp:id/email_sign_in_button")
-    WebElement signInBtn;
+public class NativePageObject {
+    private NativeHomePage homePage;
+    private NativeRegistrationPage registrationPage;
+    private NativeBudgetPage budgetPage;
 
     public NativePageObject(AppiumDriver appiumDriver) {
-        PageFactory.initElements( new AppiumFieldDecorator(appiumDriver), this);
+        homePage = new NativeHomePage(appiumDriver);
+        registrationPage = new NativeRegistrationPage(appiumDriver);
+        budgetPage = new NativeBudgetPage(appiumDriver);
+
     }
 
+    public NativeHomePage getHomePage() {
 
+        return homePage;
+    }
+
+    public NativeBudgetPage getBudgetPage() {
+        return budgetPage;
+    }
+
+    public NativeRegistrationPage getRegistrationPage() {
+        return registrationPage;
+    }
 }
