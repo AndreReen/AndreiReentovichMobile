@@ -1,5 +1,6 @@
 package scenarios;
 
+import io.restassured.RestAssured;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import setup.BaseTest;
@@ -11,6 +12,8 @@ public class nativeMobileTests extends BaseTest {
             description = "Performs registration and signs in to the app, checks BudgetActivity title text",
             dataProviderClass = TestDataProvider.class, dataProvider = "nativeTestData")
     public void nativeExerciseTest(String email, String name, String password, String title) throws Exception {
+
+
         getNativePO().getHomePage().goToRegistration();
         getNativePO().getRegistrationPage().performRegistration(email,name, password);
         getNativePO().getHomePage().performLogin(email, password);

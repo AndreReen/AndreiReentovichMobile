@@ -1,6 +1,8 @@
 package entity;
 
 
+import java.util.Objects;
+
 public class WebTestEntity {
     String url;
     String search;
@@ -32,5 +34,18 @@ public class WebTestEntity {
                 "url='" + url + '\'' +
                 ", search='" + search + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WebTestEntity that = (WebTestEntity) o;
+        return Objects.equals(url, that.url) && Objects.equals(search, that.search);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(url, search);
     }
 }
