@@ -70,7 +70,7 @@ public class androidApiSetup {
                 .log().body();
 
 
-        //TO DO
+ 
         // upload Artifact Apk and get It's id
         artifactId = RestAssured
                 .given()
