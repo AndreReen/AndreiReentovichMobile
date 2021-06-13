@@ -27,7 +27,7 @@ public class androidApiSetup {
     private static String artifactId;
     private static String token;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setUp() {
         String filename = "token.properties";
         String propToken = "";
@@ -76,16 +76,16 @@ public class androidApiSetup {
                 .header("Authorization", token)
                 .header("X-File-Name", "EPAMTestApp.apk")
                 .header("X-Content-Type", "application/zip")
-                .header("X-Alias","1.0")
+                .header("X-Alias", "1.0")
                 .multiPart("file", new File("src/main/resources/EPAMTestApp.apk"))
                 .when()
                 .post("https://mobilecloud.epam.com/automation/api/v1/spaces/artifacts/0")
                 .then()
                 .log().all()
-        .extract().path("id");
+                .extract().path("id");
 
         //get uploaded artifacts
-         String artifacts = RestAssured
+        String artifacts = RestAssured
                 .given()
                 .header("Authorization", token)
                 .when()
@@ -125,7 +125,7 @@ public class androidApiSetup {
         nativePO = new NativePageObject(appiumDriver);
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void tearDown() {
 
         //delete Artifact by id
@@ -136,6 +136,8 @@ public class androidApiSetup {
                 .delete("https://mobilecloud.epam.com/automation/api/v1/spaces/artifacts/0/" + artifactId)
                 .then()
                 .log().all();
+
+        appiumDriver.closeApp();
     }
 
     public static AppiumDriver getAppiumDriver() {
