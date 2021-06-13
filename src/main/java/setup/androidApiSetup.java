@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 
 public class androidApiSetup {
 
-
     private static AppiumDriver appiumDriver;
     private static NativePageObject nativePO;
 
