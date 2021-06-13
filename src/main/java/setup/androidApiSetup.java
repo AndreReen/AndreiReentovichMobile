@@ -55,7 +55,7 @@ public class androidApiSetup {
                 .extract().body().asPrettyString();
 
         //parse response to Array of objects
-        Device nDev[] = new Gson()
+        Device[] nDev = new Gson()
                 .fromJson(response, Device[].class);
         String udid = nDev[0].getDesiredCapabilities().getUdid();
 
@@ -70,7 +70,7 @@ public class androidApiSetup {
                 .log().body();
 
 
- 
+
         // upload Artifact Apk and get It's id
         artifactId = RestAssured
                 .given()
