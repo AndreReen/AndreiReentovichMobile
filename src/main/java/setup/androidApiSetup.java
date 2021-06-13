@@ -1,5 +1,6 @@
 package setup;
 
+import beans.Artifact;
 import beans.Device;
 import com.google.gson.Gson;
 import io.appium.java_client.AppiumDriver;
@@ -85,6 +86,20 @@ public class androidApiSetup {
                 .log().all()
         .extract().path("id");
 
+
+        //get uploaded artifacts
+         String artifacts = RestAssured
+                .given()
+                .header("Authorization", token)
+                .when()
+                .get("https://mobilecloud.epam.com/automation/api/v1/spaces/artifacts/0")
+                .then()
+                .extract().body().asPrettyString();
+
+        //parse artifacts response to Array of objects
+        Artifact[] nArtifact = new Gson()
+                .fromJson(artifacts, Artifact[].class);
+
         //install App on device
         RestAssured
                 .given()
@@ -98,8 +113,8 @@ public class androidApiSetup {
         //mandatory Android capabilities
         capabilities.setCapability("platformName", nDev[0].getDesiredCapabilities().getPlatformName());
         capabilities.setCapability("deviceName", nDev[0].getDesiredCapabilities().getDeviceName());
-        capabilities.setCapability("appPackage", "platkovsky.alexey.epamtestapp");
-        capabilities.setCapability("appActivity", "activities.LoginActivity");
+        capabilities.setCapability("appPackage", nArtifact[0].getApk().getPackageName());
+        capabilities.setCapability("appActivity", nArtifact[0].getApk().getLauncherActivities().get(0));
 
         try {
             appiumDriver = new AppiumDriver(new URL("https://EPM-TSTF:" + propToken + "@mobilecloud.epam.com/wd/hub"), capabilities);
