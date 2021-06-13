@@ -10,10 +10,10 @@ public class ReadProperties {
 
     private static HashMap<String, String> propertiesMap;
 
-     public HashMap<String,String> getPropetriesMap() {
+     public HashMap<String,String> getPropetriesMap(String fileName) {
         propertiesMap = new HashMap<>();
         ReadProperties app = new ReadProperties();
-        app.propertyToMap("testProps.properties");
+        app.propertyToMap(fileName);
         return propertiesMap;
     }
 

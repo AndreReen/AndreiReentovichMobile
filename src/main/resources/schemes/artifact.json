@@ -1,0 +1,102 @@
+[
+  {
+    "id": "6e4762db-1aaf-4b7f-a357-5efb0a60260c",
+    "name": "9f2a01e2-01ce-4eba-8433-771849c40fa4.ipa",
+    "realName": "EPAMTestApp1.ipa",
+    "bid": "0",
+    "private": true,
+    "uploadedBy": "andrei_reentovich@epam.com",
+    "verified": true,
+    "contentType": "application/zip",
+    "contentLength": 446424,
+    "href": "0-space/9f2a01e2-01ce-4eba-8433-771849c40fa4.ipa",
+    "checksum": "",
+    "alias": "",
+    "apk": null,
+    "ipa": {
+      "entitelments": [],
+      "bundleId": "com.epam.EPAMTestApp.ii",
+      "version": "1.0",
+      "platforms": [
+        "iPhoneOS"
+      ]
+    }
+  },
+  {
+    "id": "c06bd820-fa86-4510-a75f-3dda0812687b",
+    "name": "038e4d8d-0a11-424e-844a-fc3d063953c6.apk",
+    "realName": "EPAMTestApp.apk",
+    "bid": "0",
+    "private": true,
+    "uploadedBy": "andrei_reentovich@epam.com",
+    "verified": true,
+    "contentType": "application/zip",
+    "contentLength": 2110845,
+    "href": "0-space/038e4d8d-0a11-424e-844a-fc3d063953c6.apk",
+    "checksum": "",
+    "alias": "",
+    "apk": {
+      "providers": [],
+      "services": [],
+      "userLibraries": [],
+      "activities": [
+        {
+          "theme": "",
+          "name": "platkovsky.alexey.epamtestapp.activities.LoginActivity",
+          "label": "",
+          "screenOrientation": "",
+          "intentFilters": [
+            {
+              "actions": [
+                {
+                  "name": "android.intent.action.MAIN"
+                }
+              ],
+              "categories": [
+                {
+                  "name": "android.intent.category.LAUNCHER"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "",
+          "name": "platkovsky.alexey.epamtestapp.activities.RegistrationActivity",
+          "label": "",
+          "screenOrientation": "",
+          "intentFilters": []
+        },
+        {
+          "theme": "",
+          "name": "platkovsky.alexey.epamtestapp.activities.BudgetActivity",
+          "label": "",
+          "screenOrientation": "",
+          "intentFilters": []
+        },
+        {
+          "theme": "",
+          "name": "platkovsky.alexey.epamtestapp.activities.NewExpenseActivity",
+          "label": "",
+          "screenOrientation": "",
+          "intentFilters": []
+        }
+      ],
+      "launcherActivities": [
+        "platkovsky.alexey.epamtestapp.activities.LoginActivity"
+      ],
+      "activityAliases": [],
+      "permissions": [
+        "android.permission.GET_ACCOUNTS",
+        "android.permission.READ_PROFILE",
+        "android.permission.READ_CONTACTS"
+      ],
+      "packageName": "platkovsky.alexey.epamtestapp",
+      "buildType": "",
+      "version": "1.0",
+      "minSDK": 19,
+      "targetSDK": 27
+    },
+    "ipa": null
+  }
+]

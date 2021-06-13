@@ -11,7 +11,7 @@ public class TestDataProvider {
     @DataProvider
     public Object[][] nativeTestData(){
         ReadProperties rProps = new ReadProperties();
-        HashMap<String, String> nativeTestData = rProps.getPropetriesMap();
+        HashMap<String, String> nativeTestData = rProps.getPropetriesMap("testProps.properties");
         return new  Object[][] {
                 {nativeTestData.get("email"), nativeTestData.get("name"), nativeTestData.get("password"), nativeTestData.get("title")}
         };

@@ -1,6 +1,12 @@
 package setup;
 
+import beans.Device;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import io.appium.java_client.AppiumDriver;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.*;
 import pageObjects.NativePageObject;
@@ -29,6 +35,11 @@ public class BaseTest implements IDriver {
     public WebPageObject getWebPO() {
         return webPO;
     }
+
+//    @BeforeSuite(alwaysRun = true)
+//    public void restDevice() {
+//    }
+
 
     @Parameters({"platformName","appType","deviceName","udid", "browserName","app", "appPackage", "appActivity", "bundleId"})
     @BeforeSuite(alwaysRun = true)

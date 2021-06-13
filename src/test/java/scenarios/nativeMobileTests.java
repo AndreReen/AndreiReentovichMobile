@@ -13,7 +13,6 @@ public class nativeMobileTests extends BaseTest {
             dataProviderClass = TestDataProvider.class, dataProvider = "nativeTestData")
     public void nativeExerciseTest(String email, String name, String password, String title) throws Exception {
 
-
         getNativePO().getHomePage().goToRegistration();
         getNativePO().getRegistrationPage().performRegistration(email,name, password);
         getNativePO().getHomePage().performLogin(email, password);

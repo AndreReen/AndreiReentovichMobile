@@ -173,6 +173,16 @@
             </properties>
         </profile>
 
+        <profile>
+            <id>bonus</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/bonusApiTest.xml</suite.file>
+            </properties>
+        </profile>
+
     </profiles>
 
 </project>
