@@ -4,6 +4,8 @@ To establish connection with the mobilecloud -
 place your token in the token.properties file inside project root directory.
 
 
+To run android native test with API setup:
+mvn test -P bonus
 
 To run native local tests:
 mvn test -P native
