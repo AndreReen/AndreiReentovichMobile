@@ -84,8 +84,6 @@ public class androidApiSetup {
                 .then()
                 .log().all()
         .extract().path("id");
-        System.out.println(artifactId);
-
 
         //install App on device
         RestAssured
@@ -97,7 +95,6 @@ public class androidApiSetup {
                 .log().all();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-
         //mandatory Android capabilities
         capabilities.setCapability("platformName", nDev[0].getDesiredCapabilities().getPlatformName());
         capabilities.setCapability("deviceName", nDev[0].getDesiredCapabilities().getDeviceName());
@@ -112,13 +109,14 @@ public class androidApiSetup {
 
         // Timeouts tuning
         appiumDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         nativePO = new NativePageObject(appiumDriver);
     }
 
     @AfterClass
     public void tearDown() {
 
-        // delete Artifact id
+        //delete Artifact by id
         RestAssured
                 .given()
                 .header("Authorization", token)
