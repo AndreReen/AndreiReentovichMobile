@@ -6,9 +6,11 @@ import io.appium.java_client.AppiumDriver;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import pageObjects.NativePageObject;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,6 +23,8 @@ public class androidApiSetup {
 
     private static AppiumDriver appiumDriver;
     private static NativePageObject nativePO;
+    private static String artifactId;
+    private static String token;
 
     @BeforeClass
     public void setUp() {
@@ -38,7 +42,7 @@ public class androidApiSetup {
             ex.printStackTrace();
         }
 
-        String token = "Bearer " + propToken;
+        token = "Bearer " + propToken;
 
         //getting a list of all available android devices
         String response = RestAssured
@@ -67,37 +71,30 @@ public class androidApiSetup {
 
 
         //TO DO
-        // upload Artifact Apk
-//        String udid = nDev[0].getDesiredCapabilities().getUdid();
-//        RestAssured
-//                .given()
-//                .header("Authorization", token)
-//                .header("X-File-Name",)
-//                .header("X-Content-Type",)
-//                .header("X-Alias",)
-//                .when()
-//                .post("https://mobilecloud.epam.com/automation/api/v1/spaces/artifacts/0")
-//                .then()
-//                .contentType(ContentType.JSON)
-//                .log().body();
-
-        // TO DO
-        // get Artifact id
+        // upload Artifact Apk and get It's id
+        artifactId = RestAssured
+                .given()
+                .header("Authorization", token)
+                .header("X-File-Name", "EPAMTestApp.apk")
+                .header("X-Content-Type", "application/zip")
+                .header("X-Alias","1.0")
+                .multiPart("file", new File("src/main/resources/EPAMTestApp.apk"))
+                .when()
+                .post("https://mobilecloud.epam.com/automation/api/v1/spaces/artifacts/0")
+                .then()
+                .log().all()
+        .extract().path("id");
+        System.out.println(artifactId);
 
 
         //install App on device
-        String appId = "4dbfe080-0e13-46df-997c-2828d82ed097";
         RestAssured
                 .given()
                 .header("Authorization", token)
                 .when()
-                .get("https://mobilecloud.epam.com/automation/api/storage/install/" + udid + "/" + appId)
+                .get("https://mobilecloud.epam.com/automation/api/storage/install/" + udid + "/" + artifactId)
                 .then()
                 .log().all();
-
-        // TO DO
-        // delete Artifact id
-
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
@@ -116,6 +113,19 @@ public class androidApiSetup {
         // Timeouts tuning
         appiumDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         nativePO = new NativePageObject(appiumDriver);
+    }
+
+    @AfterClass
+    public void tearDown() {
+
+        // delete Artifact id
+        RestAssured
+                .given()
+                .header("Authorization", token)
+                .when()
+                .delete("https://mobilecloud.epam.com/automation/api/v1/spaces/artifacts/0/" + artifactId)
+                .then()
+                .log().all();
     }
 
     public static AppiumDriver getAppiumDriver() {
