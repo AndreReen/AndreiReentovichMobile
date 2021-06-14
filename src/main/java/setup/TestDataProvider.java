@@ -1,23 +1,29 @@
 package setup;
 
+import com.google.gson.Gson;
+import entity.WebTestEntity;
 import org.testng.annotations.DataProvider;
-
-import static setup.ReadProperties.propertiesMap;
+import java.io.FileReader;
+import java.util.HashMap;
 
 public class TestDataProvider {
 
     @DataProvider
     public Object[][] nativeTestData(){
-        ReadProperties.main();
+        ReadProperties rProps = new ReadProperties();
+        HashMap<String, String> nativeTestData = rProps.getPropetriesMap("testProps.properties");
         return new  Object[][] {
-                {propertiesMap.get("email"), propertiesMap.get("name"), propertiesMap.get("password"), propertiesMap.get("title")}
+                {nativeTestData.get("email"), nativeTestData.get("name"), nativeTestData.get("password"), nativeTestData.get("title")}
         };
     }
 
     @DataProvider
-    public Object[][] webTestData(){
-        return new  Object[][] {
-                {"https://google.com", "EPAM"}
-        };
+    public Object[] webTestData() throws Exception{
+
+        String path = "src/test/resources/webTestData.json";
+        WebTestEntity[] webTestEntity = new Gson().fromJson(new FileReader(path), WebTestEntity[].class);
+
+        return webTestEntity;
+
     }
 }

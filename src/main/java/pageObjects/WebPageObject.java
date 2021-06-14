@@ -16,7 +16,10 @@ public class WebPageObject {
     private List<WebElement> searchResults;
 
     public void search(String text) {
-        searchField.sendKeys(text + "\n");
+        searchField.sendKeys(text + '\uE007');
+    }
+    public WebElement getSearchField() {
+        return searchField;
     }
 
     public List<WebElement> getResults() {

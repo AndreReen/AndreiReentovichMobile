@@ -1,5 +1,6 @@
 package scenarios;
 
+import entity.WebTestEntity;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import setup.BaseTest;
@@ -9,14 +10,15 @@ public class webMobileTests extends BaseTest {
 
     @Test(groups = {"web"}, description = "Open Google.com & search EPAM, assure we get search results",
     dataProviderClass = TestDataProvider.class, dataProvider = "webTestData")
-    public void webExerciseTest(String URL, String textToSearch) {
+    public void webExerciseTest(WebTestEntity webTestData) {
 
-        getDriver().get(URL);
-        getWebPO().search(textToSearch);
-
-        Assert.assertTrue(getWebPO().getResults().size() > 1);
+        getDriver().get(webTestData.getUrl());
+        getWebPO().search(webTestData.getSearch());
+        Assert.assertTrue(getWebPO().getResults().size() > 0);
         System.out.println("Found " + getWebPO().getResults().size() + " search results");
-        getWebPO().getResults().forEach(element -> System.out.println(element.getText()));
+        getWebPO().getResults().forEach(
+                element -> Assert.assertTrue(element.getText().toLowerCase().contains("epam")));
+
     }
 
 }
